@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainra Learning - Komunitas Game Development untuk Pemula</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-blue: #1e3a8a;
+            --dark-blue-light: #1e40af;
+            --dark-blue-dark: #0f172a;
+            --dark-bg: #0f172a;
+            --dark-bg-light: #1e293b;
+            --dark-bg-lighter: #334155;
+            --orange-bright: #ff6b35;
+            --orange-light: #ff8c42;
+            --orange-accent: #ff7849;
+            --white: #ffffff;
+            --text-dark: #1e3a8a;
+            --text-light: #cbd5e1;
+            --text-lighter: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-lighter);
+            overflow-x: hidden;
+            background: var(--dark-bg);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-lighter);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange-bright);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-lighter);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 50%, var(--dark-blue-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,107,53,0.15)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,107,53,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--orange-bright);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--orange-bright);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+            background: var(--orange-light);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: var(--dark-bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-lighter);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+        
+        .about-text p {
+            color: var(--text-light);
+        }
+        
+        .about-text p:first-child::first-letter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--orange-bright);
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 100%);
+            border-radius: 20px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+            box-shadow: 0 10px 40px rgba(30, 58, 138, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: var(--orange-bright);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--dark-bg-light);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-lighter);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 50%, var(--dark-blue-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button-secondary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--orange-bright);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+            background: var(--orange-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue-dark);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--orange-bright), transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--orange-bright);
+        }
+
+        /* Join Community Card */
+        .join-community-card {
+            padding: 5rem 2rem;
+            background: var(--dark-bg-light);
+        }
+
+        .community-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .community-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .community-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .community-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .community-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .community-card:hover .community-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Open Project Card */
+        .open-project-card {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .project-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg-light);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .project-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .project-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Contact Card */
+        .contact-card-section {
+            padding: 5rem 2rem;
+            background: var(--dark-bg-light);
+        }
+
+        .contact-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .contact-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .contact-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover .contact-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Support Card */
+        .support-card-section {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .support-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg-light);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .support-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .support-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .support-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .support-card:hover .support-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Jasa Card */
+        .jasa-card-section {
+            padding: 5rem 2rem;
+            background: var(--dark-bg-light);
+        }
+
+        .jasa-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .jasa-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .jasa-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .jasa-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .jasa-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .jasa-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .jasa-card:hover .jasa-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Resource Card */
+        .resource-card-section {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .resource-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--dark-bg-light);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--orange-bright);
+        }
+
+        .resource-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .resource-card h3 {
+            font-size: 2rem;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+        }
+
+        .resource-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-card-arrow {
+            display: inline-block;
+            color: var(--orange-bright);
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover .resource-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 2rem 0;
+                gap: 0;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.5rem 2rem;
+                font-size: 1.1rem;
+                width: 100%;
+            }
+
+            .hero {
+                padding: 1rem;
+                min-height: 90vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero h1::after {
+                width: 60px;
+                height: 3px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+
+            .cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .about {
+                padding: 3rem 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .features {
+                padding: 3rem 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+                margin-bottom: 2rem;
+            }
+
+            .join-community-card,
+            .open-project-card,
+            .contact-card-section,
+            .support-card-section,
+            .jasa-card-section,
+            .resource-card-section {
+                padding: 3rem 1rem;
+            }
+
+            .community-card,
+            .project-card,
+            .contact-card,
+            .support-card,
+            .jasa-card,
+            .resource-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .community-card-icon,
+            .project-card-icon,
+            .contact-card-icon,
+            .support-card-icon,
+            .jasa-card-icon,
+            .resource-card-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .community-card h3,
+            .project-card h3,
+            .contact-card h3,
+            .support-card h3,
+            .jasa-card h3,
+            .resource-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .community-card p,
+            .project-card p,
+            .contact-card p,
+            .support-card p,
+            .jasa-card p,
+            .resource-card p {
+                font-size: 1rem;
+            }
+
+            .cta-section {
+                padding: 3rem 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+
+            .cta-button-secondary {
+                padding: 0.875rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p {
+                font-size: 0.875rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.25rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .community-card,
+            .project-card,
+            .contact-card,
+            .support-card,
+            .jasa-card,
+            .resource-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .community-card-icon,
+            .project-card-icon,
+            .contact-card-icon,
+            .support-card-icon,
+            .jasa-card-icon,
+            .resource-card-icon {
+                font-size: 2.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .nav-container {
+                max-width: 1400px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Mainra Learning</div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Beranda</a></li>
+                <li><a href="#tentang" onclick="closeMenu()">Tentang</a></li>
+                <li><a href="#fitur" onclick="closeMenu()">Fitur</a></li>
+                <li><a href="bergabung.html" onclick="closeMenu()">Bergabung</a></li>
+                <li><a href="open-project.html" onclick="closeMenu()">Open Project</a></li>
+                <li><a href="kontak.html" onclick="closeMenu()">Kontak</a></li>
+                <li><a href="support.html" onclick="closeMenu()">Support</a></li>
+                <li><a href="jasa.html" onclick="closeMenu()">Jasa</a></li>
+                <li><a href="resource.html" onclick="closeMenu()">Resource</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Mainra Learning</h1>
+            <p>Studio Game dan Komunitas untuk Para Pemula yang Ingin Mengembangkan Kreativitas dalam Game Development</p>
+            <a href="#tentang" class="cta-button">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="tentang">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Mainra adalah studio game dan komunitas yang berfokus pada pengembangan game untuk pemula. Kami menyediakan bimbingan, sumber daya, dan dukungan untuk membantu para anggotanya meningkatkan kemampuan dan kreativitas mereka.</p>
+                    <p style="margin-top: 1.5rem;">Bergabunglah dengan komunitas kami dan mulailah perjalanan Anda dalam dunia game development. Bersama-sama, kita akan belajar, berkreasi, dan menciptakan game-game yang menginspirasi.</p>
+                </div>
+                <div class="about-image">
+                    🎮
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="fitur">
+        <div class="container">
+            <h2 class="section-title">Apa yang Kami Tawarkan</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Bimbingan Lengkap</h3>
+                    <p>Dapatkan panduan step-by-step dari dasar hingga tingkat lanjut dalam pengembangan game. Materi yang mudah dipahami dan praktis untuk pemula.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Sumber Daya Berkualitas</h3>
+                    <p>Akses ke berbagai tools, template, dan resource yang dapat membantu mempercepat proses pembelajaran dan pengembangan game Anda.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Komunitas Supportif</h3>
+                    <p>Bergabung dengan komunitas yang aktif dan saling mendukung. Berbagi pengalaman, bertanya, dan berkolaborasi dengan sesama developer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Meningkatkan Kreativitas</h3>
+                    <p>Kembangkan ide-ide kreatif Anda dengan dukungan dari mentor dan komunitas. Belajar dari berbagai proyek dan inspirasi game yang beragam.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Proyek Praktis</h3>
+                    <p>Terapkan pengetahuan Anda melalui proyek-proyek nyata. Dari game sederhana hingga proyek yang lebih kompleks untuk membangun portfolio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Fokus pada Pemula</h3>
+                    <p>Kurikulum dan pendekatan yang dirancang khusus untuk pemula. Tidak perlu pengalaman sebelumnya, semua bisa mulai dari nol.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Community Card Section -->
+    <section class="join-community-card">
+        <div class="container">
+            <a href="bergabung.html" class="community-card">
+                <div class="community-card-icon">👥</div>
+                <h3>Bergabung dengan Komunitas</h3>
+                <p>Bergabunglah dengan komunitas Mainra Learning di Discord dan WhatsApp untuk berdiskusi, bertanya, berbagi pengalaman, dan berkolaborasi dengan sesama developer game!</p>
+                <span class="community-card-arrow">Pelajari Lebih Lanjut →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Open Project Card Section -->
+    <section class="open-project-card">
+        <div class="container">
+            <a href="open-project.html" class="project-card">
+                <div class="project-card-icon">🚀</div>
+                <h3>Open Project</h3>
+                <p>Jelajahi dan ikuti proyek game development terbuka dari komunitas Mainra Learning. Berpartisipasi dalam kolaborasi dan dapatkan inspirasi dari proyek-proyek kreatif!</p>
+                <span class="project-card-arrow">Lihat Proyek →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Card Section -->
+    <section class="contact-card-section">
+        <div class="container">
+            <a href="kontak.html" class="contact-card">
+                <div class="contact-card-icon">💬</div>
+                <h3>Hubungi Kami</h3>
+                <p>Ada pertanyaan atau ingin berdiskusi? Hubungi kami melalui WhatsApp untuk mendapatkan bantuan langsung dari tim Mainra Learning!</p>
+                <span class="contact-card-arrow">Hubungi Sekarang →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Support Card Section -->
+    <section class="support-card-section">
+        <div class="container">
+            <a href="support.html" class="support-card">
+                <div class="support-card-icon">☕</div>
+                <h3>Support Kami</h3>
+                <p>Bantu kami terus berkembang dan memberikan konten berkualitas untuk komunitas game development. Dukungan Anda sangat berarti bagi kami!</p>
+                <span class="support-card-arrow">Support Sekarang →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Jasa Card Section -->
+    <section class="jasa-card-section">
+        <div class="container">
+            <a href="jasa.html" class="jasa-card">
+                <div class="jasa-card-icon">🎮</div>
+                <h3>Jasa Pembuatan Game</h3>
+                <p>Butuh jasa pembuatan game atau elemen di dalamnya seperti aset, karakter, UI/UX? Tim profesional kami siap membantu mewujudkan ide game Anda!</p>
+                <span class="jasa-card-arrow">Lihat Layanan →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Resource Card Section -->
+    <section class="resource-card-section">
+        <div class="container">
+            <a href="resource.html" class="resource-card">
+                <div class="resource-card-icon">📦</div>
+                <h3>Resource</h3>
+                <p>Akses kumpulan resource berkualitas untuk game development Anda! Dari aset visual, audio, template, hingga tutorial lengkap - semua tersedia di channel Resource Discord kami!</p>
+                <span class="resource-card-arrow">Lihat Resource →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Siap Memulai Perjalanan Game Development?</h2>
+            <p>Bergabunglah dengan Mainra Learning hari ini dan mulailah menciptakan game impian Anda!</p>
+            <a href="bergabung.html" class="cta-button-secondary">Bergabung Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak">
+        <div class="footer-content">
+            <h3 style="margin-bottom: 1rem;">Mainra Learning</h3>
+            <p style="opacity: 0.8; margin-bottom: 1rem;">Studio Game dan Komunitas untuk Para Pemula</p>
+            <ul class="footer-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#fitur">Fitur</a></li>
+                <li><a href="bergabung.html">Bergabung</a></li>
+                <li><a href="open-project.html">Open Project</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="jasa.html">Jasa</a></li>
+                <li><a href="resource.html">Resource</a></li>
+            </ul>
+            <p style="opacity: 0.6; margin-top: 2rem; font-size: 0.9rem;">&copy; 2024 Mainra Learning. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navLinks.contains(event.target);
+            const isClickOnToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Close menu on window resize (if resized to desktop)
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    closeMenu();
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(15, 23, 42, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.5)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.98)';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
