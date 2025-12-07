@@ -77,9 +77,58 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.5);
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .logo-circle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -269,6 +318,7 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             border-radius: 16px; /* compact */
             height: 240px; /* compact */
+            width: 240px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -277,9 +327,24 @@
             box-shadow: 0 12px 28px rgba(0,0,0,0.45); /* refreshed */
             position: relative;
             overflow: hidden;
+            border-radius: 50%;
+            margin: 0 auto;
         }
         
         .about-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .about-image::after {
             content: '';
             position: absolute;
             top: -50%;
@@ -289,53 +354,15 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             opacity: 0.3;
+            z-index: 0;
         }
 
-        /* Features Section */
-        .features {
-            padding: 3.5rem 1.5rem; /* compact */
-            background: var(--bg-white);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* compact */
-            gap: 1.25rem; /* compact */
-            margin-top: 1.5rem; /* compact */
-        }
-
-        .feature-card {
-            padding: 1.25rem; /* compact */
-            background: var(--bg-white);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .feature-icon {
-            font-size: 2.25rem; /* compact */
-            margin-bottom: 0.6rem; /* compact */
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
-        }
-
-        .feature-card h3 {
-            font-size: 1.15rem; /* compact */
-            margin-bottom: 0.5rem; /* compact */
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
+        .about-image img {
+            max-width: 60%;
+            height: auto;
+            object-fit: contain;
+            z-index: 2;
+            position: relative;
         }
 
         /* CTA Section */
@@ -593,7 +620,6 @@
             .nav-links { gap: 1rem; }
             .nav-links a { font-size: 0.9rem; }
             .hero h1 { font-size: 2.4rem; }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
             .section-title { font-size: 1.9rem; }
             .card-grid-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
         }
@@ -601,6 +627,10 @@
         /* Mobile */
         @media (max-width: 768px) {
             nav { padding: 0.9rem; }
+
+            .logo { gap: 0.5rem; }
+            .logo-circle { width: 40px; height: 40px; }
+            .logo-text { font-size: 1.1rem; }
 
             .menu-toggle {
                 display: flex;
@@ -671,17 +701,6 @@
             .about-image {
                 height: 250px;
                 font-size: 3rem;
-            }
-
-            .features { padding: 2.5rem 1rem; }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem;
             }
 
             .section-title {
@@ -769,6 +788,9 @@
 
         /* Small Mobile */
         @media (max-width: 480px) {
+            .logo { gap: 0.4rem; }
+            .logo-circle { width: 36px; height: 36px; }
+            .logo-text { font-size: 1rem; }
             .hero h1 {
                 font-size: 1.75rem;
             }
@@ -783,18 +805,6 @@
 
             .about-text {
                 font-size: 1rem;
-            }
-
-            .feature-card {
-                padding: 1.25rem;
-            }
-
-            .feature-icon {
-                font-size: 2.5rem;
-            }
-
-            .feature-card h3 {
-                font-size: 1.25rem;
             }
 
             .card-grid-container {
@@ -848,9 +858,9 @@
                 padding: 0.75rem 1rem;
             }
 
-            .logo {
-                font-size: 1.25rem;
-            }
+            .logo { gap: 0.4rem; }
+            .logo-circle { width: 36px; height: 36px; }
+            .logo-text { font-size: 1rem; }
         }
 
         /* Large Desktop */
@@ -874,7 +884,12 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Mainra Learning</div>
+            <a href="#home" class="logo">
+                <div class="logo-circle">
+                    <img src="Images/mainra learning warna.png" alt="Mainra Learning Logo">
+                </div>
+                <span class="logo-text">MAINRA</span>
+            </a>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -911,50 +926,12 @@
                     <p style="margin-top: 1.5rem;">Bergabunglah dengan komunitas kami dan mulailah perjalanan Anda dalam dunia game development. Bersama-sama, kita akan belajar, berkreasi, dan menciptakan game-game yang menginspirasi.</p>
                 </div>
                 <div class="about-image">
-                    🎮
+                    <img src="Images/mainra learning warna.png" alt="Mainra Learning Logo">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="fitur">
-        <div class="container">
-            <h2 class="section-title">Apa yang Kami Tawarkan</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Bimbingan Lengkap</h3>
-                    <p>Dapatkan panduan step-by-step dari dasar hingga tingkat lanjut dalam pengembangan game. Materi yang mudah dipahami dan praktis untuk pemula.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛠️</div>
-                    <h3>Sumber Daya Berkualitas</h3>
-                    <p>Akses ke berbagai tools, template, dan resource yang dapat membantu mempercepat proses pembelajaran dan pengembangan game Anda.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Komunitas Supportif</h3>
-                    <p>Bergabung dengan komunitas yang aktif dan saling mendukung. Berbagi pengalaman, bertanya, dan berkolaborasi dengan sesama developer.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3>Meningkatkan Kreativitas</h3>
-                    <p>Kembangkan ide-ide kreatif Anda dengan dukungan dari mentor dan komunitas. Belajar dari berbagai proyek dan inspirasi game yang beragam.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Proyek Praktis</h3>
-                    <p>Terapkan pengetahuan Anda melalui proyek-proyek nyata. Dari game sederhana hingga proyek yang lebih kompleks untuk membangun portfolio.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Fokus pada Pemula</h3>
-                    <p>Kurikulum dan pendekatan yang dirancang khusus untuk pemula. Tidak perlu pengalaman sebelumnya, semua bisa mulai dari nol.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Menu Cards Grid Section -->
     <section class="menu-cards-section">
