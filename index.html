@@ -12,27 +12,48 @@
         }
 
         :root {
-            --dark-blue: #1e3a8a;
-            --dark-blue-light: #1e40af;
-            --dark-blue-dark: #0f172a;
-            --dark-bg: #0f172a;
-            --dark-bg-light: #1e293b;
-            --dark-bg-lighter: #334155;
-            --orange-bright: #ff6b35;
-            --orange-light: #ff8c42;
-            --orange-accent: #ff7849;
+            /* Brand */
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+
+            /* Dark theme palette */
+            --bg-dark: #0b1220;      /* page background */
+            --bg-white: #111827;     /* surfaces (cards/nav) intentionally dark */
+            --surface: #0f172a;
             --white: #ffffff;
-            --text-dark: #1e3a8a;
-            --text-light: #cbd5e1;
-            --text-lighter: #e2e8f0;
+
+            /* Text on dark */
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-light: #94a3b8;
+            --text-lighter: #f3f4f6;
+
+            /* Accents */
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --orange-bright: #f59e0b;
+
+            /* Additional dark aliases (used in some sections) */
+            --dark-bg: var(--bg-dark);
+            --dark-bg-light: #111827;
+            --dark-blue: #0b1220;
+            --dark-blue-light: #0f1b31;
+            --dark-blue-dark: #070d1a;
+
+            /* UI chrome */
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.45);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             line-height: 1.6;
-            color: var(--text-lighter);
+            color: var(--text-primary);
             overflow-x: hidden;
-            background: var(--dark-bg);
+            background: var(--bg-dark);
         }
 
         /* Navigation */
@@ -40,10 +61,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            padding: 0.6rem 1.25rem; /* compact */
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -59,24 +79,24 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--text-lighter);
+            color: var(--primary);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.25rem; /* compact */
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--orange-bright);
+            color: var(--primary);
         }
 
         /* Mobile Menu Toggle */
@@ -91,7 +111,7 @@
         .menu-toggle span {
             width: 25px;
             height: 3px;
-            background: var(--text-lighter);
+            background: var(--text-primary);
             border-radius: 3px;
             transition: all 0.3s ease;
         }
@@ -110,14 +130,14 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 82vh; /* compact */
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 50%, var(--dark-blue-dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: var(--white);
             text-align: center;
-            padding: 2rem;
+            padding: 1.25rem; /* compact */
             position: relative;
             overflow: hidden;
         }
@@ -129,8 +149,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,107,53,0.15)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
         
         .hero::after {
@@ -140,7 +160,7 @@
             right: -10%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255,107,53,0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             border-radius: 50%;
             animation: pulse 4s ease-in-out infinite;
         }
@@ -157,52 +177,52 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem; /* compact */
+            margin-bottom: 0.6rem; /* compact */
             animation: fadeInUp 1s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .hero h1::after {
             content: '';
             display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--orange-bright);
-            margin: 1rem auto 0;
+            width: 80px; /* compact */
+            height: 3px; /* compact */
+            background: var(--accent-orange);
+            margin: 0.6rem auto 0; /* compact */
             border-radius: 2px;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+            font-size: 1.05rem; /* compact */
+            margin-bottom: 1.25rem; /* compact */
             opacity: 0.95;
             animation: fadeInUp 1s ease 0.2s both;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--orange-bright);
+            padding: 0.75rem 1.5rem; /* compact */
+            background: var(--accent-orange);
             color: var(--white);
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 10px;
             font-weight: bold;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: all 0.3s ease;
             animation: fadeInUp 1s ease 0.4s both;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35); /* refreshed */
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
-            background: var(--orange-light);
+            box-shadow: var(--shadow-lg);
+            background: #ea580c;
         }
 
         /* About Section */
         .about {
-            padding: 5rem 2rem;
-            background: var(--dark-bg-light);
+            padding: 3.5rem 1.5rem; /* compact */
+            background: var(--bg-dark);
         }
 
         .container {
@@ -212,32 +232,33 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text-lighter);
+            font-size: 2.1rem; /* compact */
+            margin-bottom: 2rem; /* compact */
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 2rem; /* compact */
             align-items: center;
         }
 
         .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
+            font-size: 1rem; /* compact */
+            line-height: 1.7; /* compact */
+            color: var(--text-secondary);
         }
         
         .about-text p {
-            color: var(--text-light);
+            color: var(--text-secondary);
         }
         
         .about-text p:first-child::first-letter {
             font-size: 3rem;
             font-weight: bold;
-            color: var(--orange-bright);
+            color: var(--primary);
             float: left;
             line-height: 1;
             margin-right: 0.5rem;
@@ -245,15 +266,15 @@
         }
 
         .about-image {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 100%);
-            border-radius: 20px;
-            height: 300px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px; /* compact */
+            height: 240px; /* compact */
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 4rem;
-            box-shadow: 0 10px 40px rgba(30, 58, 138, 0.3);
+            font-size: 3rem; /* compact */
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45); /* refreshed */
             position: relative;
             overflow: hidden;
         }
@@ -265,60 +286,62 @@
             right: -20%;
             width: 200px;
             height: 200px;
-            background: var(--orange-bright);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             opacity: 0.3;
         }
 
         /* Features Section */
         .features {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
+            padding: 3.5rem 1.5rem; /* compact */
+            background: var(--bg-white);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* compact */
+            gap: 1.25rem; /* compact */
+            margin-top: 1.5rem; /* compact */
         }
 
         .feature-card {
-            padding: 2rem;
-            background: var(--dark-bg-light);
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 1.25rem; /* compact */
+            background: var(--bg-white);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+            font-size: 2.25rem; /* compact */
+            margin-bottom: 0.6rem; /* compact */
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
         }
 
         .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-lighter);
+            font-size: 1.15rem; /* compact */
+            margin-bottom: 0.5rem; /* compact */
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .feature-card p {
-            color: var(--text-light);
+            color: var(--text-secondary);
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 50%, var(--dark-blue-dark) 100%);
+            padding: 3.5rem 1.5rem; /* compact */
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: var(--white);
             text-align: center;
             position: relative;
@@ -332,7 +355,7 @@
             left: -10%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
         
@@ -343,7 +366,7 @@
             right: -10%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
         
@@ -353,39 +376,39 @@
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem; /* compact */
+            margin-bottom: 0.5rem; /* compact */
         }
 
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.05rem; /* compact */
+            margin-bottom: 1.25rem; /* compact */
             opacity: 0.95;
         }
 
         .cta-button-secondary {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--orange-bright);
+            padding: 0.75rem 1.5rem; /* compact */
+            background: var(--accent-orange);
             color: var(--white);
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-weight: bold;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
         }
 
         .cta-button-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
-            background: var(--orange-light);
+            box-shadow: var(--shadow-lg);
+            background: #ea580c;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-blue-dark);
+            background: var(--primary);
             color: var(--white);
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem; /* compact */
             text-align: center;
             position: relative;
         }
@@ -397,7 +420,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--orange-bright), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
         }
 
         .footer-content {
@@ -408,375 +431,50 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 1.25rem; /* compact */
+            margin: 1.25rem 0; /* compact */
             list-style: none;
         }
 
         .footer-links a {
             color: var(--white);
             text-decoration: none;
-            opacity: 0.8;
+            opacity: 0.9;
             transition: opacity 0.3s ease;
         }
 
         .footer-links a:hover {
             opacity: 1;
-            color: var(--orange-bright);
         }
 
         /* Join Community Card */
         .join-community-card {
-            padding: 5rem 2rem;
-            background: var(--dark-bg-light);
-        }
-
-        .community-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .community-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .community-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .community-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .community-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .community-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .community-card:hover .community-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Open Project Card */
         .open-project-card {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .project-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg-light);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .project-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .project-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Contact Card */
         .contact-card-section {
-            padding: 5rem 2rem;
-            background: var(--dark-bg-light);
-        }
-
-        .contact-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .contact-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .contact-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .contact-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-card:hover .contact-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Support Card */
         .support-card-section {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .support-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg-light);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .support-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .support-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .support-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .support-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .support-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .support-card:hover .support-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Jasa Card */
         .jasa-card-section {
-            padding: 5rem 2rem;
-            background: var(--dark-bg-light);
-        }
-
-        .jasa-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .jasa-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .jasa-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .jasa-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .jasa-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .jasa-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .jasa-card:hover .jasa-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Resource Card */
         .resource-card-section {
-            padding: 5rem 2rem;
-            background: var(--dark-bg);
-        }
-
-        .resource-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--dark-bg-light);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.2);
-            border-color: var(--orange-bright);
-        }
-
-        .resource-card-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .resource-card h3 {
-            font-size: 2rem;
-            color: var(--text-lighter);
-            margin-bottom: 1rem;
-        }
-
-        .resource-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .resource-card-arrow {
-            display: inline-block;
-            color: var(--orange-bright);
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .resource-card:hover .resource-card-arrow {
-            transform: translateX(5px);
+            display: none;
         }
 
         /* Animations */
@@ -791,35 +489,118 @@
             }
         }
 
-        /* Responsive */
+        /* Card Grid Sections */
+        .card-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Menu card styling */
+        .community-card,
+        .project-card,
+        .contact-card,
+        .support-card,
+        .jasa-card,
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            background: var(--bg-white);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            min-height: 280px;
+        }
+
+        .community-card:hover,
+        .project-card:hover,
+        .contact-card:hover,
+        .support-card:hover,
+        .jasa-card:hover,
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .community-card-icon,
+        .project-card-icon,
+        .contact-card-icon,
+        .support-card-icon,
+        .jasa-card-icon,
+        .resource-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .community-card h3,
+        .project-card h3,
+        .contact-card h3,
+        .support-card h3,
+        .jasa-card h3,
+        .resource-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .community-card p,
+        .project-card p,
+        .contact-card p,
+        .support-card p,
+        .jasa-card p,
+        .resource-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .community-card-arrow,
+        .project-card-arrow,
+        .contact-card-arrow,
+        .support-card-arrow,
+        .jasa-card-arrow,
+        .resource-card-arrow {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .community-card:hover .community-card-arrow,
+        .project-card:hover .project-card-arrow,
+        .contact-card:hover .contact-card-arrow,
+        .support-card:hover .support-card-arrow,
+        .jasa-card:hover .jasa-card-arrow,
+        .resource-card:hover .resource-card-arrow {
+            transform: translateX(5px);
+        }
+
         /* Tablet */
         @media (max-width: 1024px) {
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.9rem; }
+            .hero h1 { font-size: 2.4rem; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .section-title { font-size: 1.9rem; }
+            .card-grid-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
         }
 
         /* Mobile */
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-            }
+            nav { padding: 0.9rem; }
 
             .menu-toggle {
                 display: flex;
@@ -831,14 +612,14 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: var(--dark-bg);
+                background: var(--bg-white);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 padding: 2rem 0;
                 gap: 0;
                 transition: left 0.3s ease;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
                 z-index: 999;
             }
 
@@ -850,7 +631,7 @@
                 width: 100%;
                 text-align: center;
                 padding: 1rem 0;
-                border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+                border-bottom: 1px solid var(--border-color);
             }
 
             .nav-links a {
@@ -858,17 +639,12 @@
                 padding: 0.5rem 2rem;
                 font-size: 1.1rem;
                 width: 100%;
+                color: var(--text-secondary);
             }
 
-            .hero {
-                padding: 1rem;
-                min-height: 90vh;
-            }
+            .hero { padding: 1rem; min-height: 88vh; }
 
-            .hero h1 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-            }
+            .hero h1 { font-size: 1.9rem; margin-bottom: 0.75rem; }
 
             .hero h1::after {
                 width: 60px;
@@ -885,9 +661,7 @@
                 font-size: 0.95rem;
             }
 
-            .about {
-                padding: 3rem 1rem;
-            }
+            .about { padding: 2.5rem 1rem; }
 
             .about-content {
                 grid-template-columns: 1fr;
@@ -899,9 +673,7 @@
                 font-size: 3rem;
             }
 
-            .features {
-                padding: 3rem 1rem;
-            }
+            .features { padding: 2.5rem 1rem; }
 
             .features-grid {
                 grid-template-columns: 1fr;
@@ -917,13 +689,13 @@
                 margin-bottom: 2rem;
             }
 
-            .join-community-card,
-            .open-project-card,
-            .contact-card-section,
-            .support-card-section,
-            .jasa-card-section,
-            .resource-card-section {
-                padding: 3rem 1rem;
+            .menu-cards-section {
+                padding: 2.5rem 1rem;
+            }
+
+            .card-grid-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .community-card,
@@ -932,7 +704,8 @@
             .support-card,
             .jasa-card,
             .resource-card {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem;
+                min-height: 250px;
             }
 
             .community-card-icon,
@@ -941,8 +714,8 @@
             .support-card-icon,
             .jasa-card-icon,
             .resource-card-icon {
-                font-size: 3rem;
-                margin-bottom: 1rem;
+                font-size: 2.5rem;
+                margin-bottom: 0.75rem;
             }
 
             .community-card h3,
@@ -951,7 +724,7 @@
             .support-card h3,
             .jasa-card h3,
             .resource-card h3 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
             .community-card p,
@@ -960,7 +733,7 @@
             .support-card p,
             .jasa-card p,
             .resource-card p {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .cta-section {
@@ -1024,13 +797,18 @@
                 font-size: 1.25rem;
             }
 
+            .card-grid-container {
+                gap: 1rem;
+            }
+
             .community-card,
             .project-card,
             .contact-card,
             .support-card,
             .jasa-card,
             .resource-card {
-                padding: 1.5rem 1rem;
+                padding: 1.25rem;
+                min-height: 230px;
             }
 
             .community-card-icon,
@@ -1039,7 +817,27 @@
             .support-card-icon,
             .jasa-card-icon,
             .resource-card-icon {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .community-card h3,
+            .project-card h3,
+            .contact-card h3,
+            .support-card h3,
+            .jasa-card h3,
+            .resource-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .community-card p,
+            .project-card p,
+            .contact-card p,
+            .support-card p,
+            .jasa-card p,
+            .resource-card p {
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
             }
 
             .cta-section h2 {
@@ -1084,8 +882,6 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" onclick="closeMenu()">Beranda</a></li>
-                <li><a href="#tentang" onclick="closeMenu()">Tentang</a></li>
-                <li><a href="#fitur" onclick="closeMenu()">Fitur</a></li>
                 <li><a href="bergabung.html" onclick="closeMenu()">Bergabung</a></li>
                 <li><a href="open-project.html" onclick="closeMenu()">Open Project</a></li>
                 <li><a href="kontak.html" onclick="closeMenu()">Kontak</a></li>
@@ -1160,75 +956,59 @@
         </div>
     </section>
 
-    <!-- Join Community Card Section -->
-    <section class="join-community-card">
+    <!-- Menu Cards Grid Section -->
+    <section class="menu-cards-section">
         <div class="container">
-            <a href="bergabung.html" class="community-card">
-                <div class="community-card-icon">👥</div>
-                <h3>Bergabung dengan Komunitas</h3>
-                <p>Bergabunglah dengan komunitas Mainra Learning di Discord dan WhatsApp untuk berdiskusi, bertanya, berbagi pengalaman, dan berkolaborasi dengan sesama developer game!</p>
-                <span class="community-card-arrow">Pelajari Lebih Lanjut →</span>
-            </a>
-        </div>
-    </section>
+            <h2 class="section-title">Jelajahi Mainra Learning</h2>
+            <div class="card-grid-container">
+                <!-- Bergabung Card -->
+                <a href="bergabung.html" class="community-card">
+                    <div class="community-card-icon">👥</div>
+                    <h3>Bergabung dengan Komunitas</h3>
+                    <p>Bergabunglah dengan komunitas Mainra Learning di Discord dan WhatsApp untuk berdiskusi, bertanya, berbagi pengalaman, dan berkolaborasi!</p>
+                    <span class="community-card-arrow">Pelajari Lebih Lanjut →</span>
+                </a>
 
-    <!-- Open Project Card Section -->
-    <section class="open-project-card">
-        <div class="container">
-            <a href="open-project.html" class="project-card">
-                <div class="project-card-icon">🚀</div>
-                <h3>Open Project</h3>
-                <p>Jelajahi dan ikuti proyek game development terbuka dari komunitas Mainra Learning. Berpartisipasi dalam kolaborasi dan dapatkan inspirasi dari proyek-proyek kreatif!</p>
-                <span class="project-card-arrow">Lihat Proyek →</span>
-            </a>
-        </div>
-    </section>
+                <!-- Open Project Card -->
+                <a href="open-project.html" class="project-card">
+                    <div class="project-card-icon">🚀</div>
+                    <h3>Open Project</h3>
+                    <p>Jelajahi dan ikuti proyek game development terbuka dari komunitas Mainra Learning. Berpartisipasi dalam kolaborasi dan dapatkan inspirasi!</p>
+                    <span class="project-card-arrow">Lihat Proyek →</span>
+                </a>
 
-    <!-- Contact Card Section -->
-    <section class="contact-card-section">
-        <div class="container">
-            <a href="kontak.html" class="contact-card">
-                <div class="contact-card-icon">💬</div>
-                <h3>Hubungi Kami</h3>
-                <p>Ada pertanyaan atau ingin berdiskusi? Hubungi kami melalui WhatsApp untuk mendapatkan bantuan langsung dari tim Mainra Learning!</p>
-                <span class="contact-card-arrow">Hubungi Sekarang →</span>
-            </a>
-        </div>
-    </section>
+                <!-- Kontak Card -->
+                <a href="kontak.html" class="contact-card">
+                    <div class="contact-card-icon">💬</div>
+                    <h3>Hubungi Kami</h3>
+                    <p>Ada pertanyaan atau ingin berdiskusi? Hubungi kami melalui WhatsApp untuk mendapatkan bantuan langsung dari tim Mainra Learning!</p>
+                    <span class="contact-card-arrow">Hubungi Sekarang →</span>
+                </a>
 
-    <!-- Support Card Section -->
-    <section class="support-card-section">
-        <div class="container">
-            <a href="support.html" class="support-card">
-                <div class="support-card-icon">☕</div>
-                <h3>Support Kami</h3>
-                <p>Bantu kami terus berkembang dan memberikan konten berkualitas untuk komunitas game development. Dukungan Anda sangat berarti bagi kami!</p>
-                <span class="support-card-arrow">Support Sekarang →</span>
-            </a>
-        </div>
-    </section>
+                <!-- Support Card -->
+                <a href="support.html" class="support-card">
+                    <div class="support-card-icon">☕</div>
+                    <h3>Support Kami</h3>
+                    <p>Bantu kami terus berkembang dan memberikan konten berkualitas untuk komunitas game development. Dukungan Anda sangat berarti bagi kami!</p>
+                    <span class="support-card-arrow">Support Sekarang →</span>
+                </a>
 
-    <!-- Jasa Card Section -->
-    <section class="jasa-card-section">
-        <div class="container">
-            <a href="jasa.html" class="jasa-card">
-                <div class="jasa-card-icon">🎮</div>
-                <h3>Jasa Pembuatan Game</h3>
-                <p>Butuh jasa pembuatan game atau elemen di dalamnya seperti aset, karakter, UI/UX? Tim profesional kami siap membantu mewujudkan ide game Anda!</p>
-                <span class="jasa-card-arrow">Lihat Layanan →</span>
-            </a>
-        </div>
-    </section>
+                <!-- Jasa Card -->
+                <a href="jasa.html" class="jasa-card">
+                    <div class="jasa-card-icon">🎮</div>
+                    <h3>Jasa Pembuatan Game</h3>
+                    <p>Butuh jasa pembuatan game atau elemen di dalamnya? Tim profesional kami siap membantu mewujudkan ide game Anda!</p>
+                    <span class="jasa-card-arrow">Lihat Layanan →</span>
+                </a>
 
-    <!-- Resource Card Section -->
-    <section class="resource-card-section">
-        <div class="container">
-            <a href="resource.html" class="resource-card">
-                <div class="resource-card-icon">📦</div>
-                <h3>Resource</h3>
-                <p>Akses kumpulan resource berkualitas untuk game development Anda! Dari aset visual, audio, template, hingga tutorial lengkap - semua tersedia di channel Resource Discord kami!</p>
-                <span class="resource-card-arrow">Lihat Resource →</span>
-            </a>
+                <!-- Resource Card -->
+                <a href="resource.html" class="resource-card">
+                    <div class="resource-card-icon">📦</div>
+                    <h3>Resource</h3>
+                    <p>Akses kumpulan resource berkualitas untuk game development Anda! Dari aset visual, audio, template, hingga tutorial lengkap!</p>
+                    <span class="resource-card-arrow">Lihat Resource →</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1248,8 +1028,6 @@
             <p style="opacity: 0.8; margin-bottom: 1rem;">Studio Game dan Komunitas untuk Para Pemula</p>
             <ul class="footer-links">
                 <li><a href="#home">Beranda</a></li>
-                <li><a href="#tentang">Tentang</a></li>
-                <li><a href="#fitur">Fitur</a></li>
                 <li><a href="bergabung.html">Bergabung</a></li>
                 <li><a href="open-project.html">Open Project</a></li>
                 <li><a href="kontak.html">Kontak</a></li>

@@ -12,19 +12,40 @@
         }
 
         :root {
-            --dark-blue: #1e3a8a;
-            --dark-blue-light: #1e40af;
-            --dark-blue-dark: #0f172a;
-            --dark-bg: #0f172a;
-            --dark-bg-light: #1e293b;
-            --dark-bg-lighter: #334155;
-            --orange-bright: #ff6b35;
-            --orange-light: #ff8c42;
-            --orange-accent: #ff7849;
+            /* Brand */
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+
+            /* Dark theme palette */
+            --bg-dark: #0b1220;      /* page background */
+            --bg-white: #111827;     /* surfaces (cards/nav) intentionally dark */
+            --surface: #0f172a;
             --white: #ffffff;
-            --text-dark: #1e3a8a;
-            --text-light: #cbd5e1;
-            --text-lighter: #e2e8f0;
+
+            /* Text on dark */
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-light: #94a3b8;
+            --text-lighter: #f3f4f6;
+
+            /* Accents */
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --orange-bright: #f59e0b;
+
+            /* Additional dark aliases */
+            --dark-bg: var(--bg-dark);
+            --dark-bg-light: #111827;
+            --dark-blue: #0b1220;
+            --dark-blue-light: #0f1b31;
+            --dark-blue-dark: #070d1a;
+
+            /* UI chrome */
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.45);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
         }
 
         body {
@@ -481,8 +502,6 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home" onclick="closeMenu()">Beranda</a></li>
-                <li><a href="index.html#tentang" onclick="closeMenu()">Tentang</a></li>
-                <li><a href="index.html#fitur" onclick="closeMenu()">Fitur</a></li>
                 <li><a href="bergabung.html" onclick="closeMenu()">Bergabung</a></li>
                 <li><a href="open-project.html" onclick="closeMenu()">Open Project</a></li>
                 <li><a href="kontak.html" onclick="closeMenu()">Kontak</a></li>
@@ -575,8 +594,6 @@
             <p style="opacity: 0.8; margin-bottom: 1rem;">Studio Game dan Komunitas untuk Para Pemula</p>
             <ul class="footer-links">
                 <li><a href="index.html#home">Beranda</a></li>
-                <li><a href="index.html#tentang">Tentang</a></li>
-                <li><a href="index.html#fitur">Fitur</a></li>
                 <li><a href="bergabung.html">Bergabung</a></li>
                 <li><a href="open-project.html">Open Project</a></li>
                 <li><a href="kontak.html">Kontak</a></li>
