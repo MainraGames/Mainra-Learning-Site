@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { COURSES } from '../constants';
 
-const apiKey = process.env.API_KEY || '';
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 // Initialize client outside if key exists, or handle gracefully inside
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
