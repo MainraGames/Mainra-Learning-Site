@@ -26,8 +26,14 @@ export const FAQPage: React.FC<PageProps> = ({ onBack }) => {
   return (
     <div className="bg-mainra-dark min-h-screen pt-24 pb-20 animate-fade-in text-white">
       <div className="container mx-auto px-4">
-        <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors">
-          <ArrowLeft size={20} /> Kembali
+        <button 
+          onClick={() => {
+            onBack();
+            window.scrollTo(0, 0);
+          }} 
+          className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors group"
+        >
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Kembali ke Beranda
         </button>
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-2 text-center">Tanya Jawab (FAQ)</h1>
@@ -60,67 +66,61 @@ export const FAQPage: React.FC<PageProps> = ({ onBack }) => {
 // --- Contact Page ---
 export const ContactPage: React.FC<ContactPageProps> = ({ onBack, settings }) => {
   // Fallback defaults if settings not provided
-  const title = settings?.title || 'Mainra Learning';
-  const address = settings?.address || 'Jl. Teknologi Raya No. 10, Kebayoran Baru, Jakarta Selatan 12150';
-  const email = settings?.email || 'halo@mainralearning.id';
-  const phone = settings?.phone || '+62 812-3456-7890 (Admin)';
+  const email = settings?.email || 'mainralearning@gmail.com';
+  const phone = settings?.phone || '085117590001';
 
   return (
     <div className="bg-mainra-dark min-h-screen pt-24 pb-20 animate-fade-in text-white">
       <div className="container mx-auto px-4">
-        <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors">
-          <ArrowLeft size={20} /> Kembali
+        <button 
+          onClick={() => {
+            onBack();
+            window.scrollTo(0, 0);
+          }} 
+          className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors group"
+        >
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Kembali ke Beranda
         </button>
         
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <div>
-            <h1 className="text-4xl font-bold mb-6">Hubungi Kami</h1>
-            <p className="text-gray-400 mb-8">Punya pertanyaan tentang program kursus atau kerjasama korporat? Tim kami siap membantu Anda.</p>
-            
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-mainra-blue/20 p-3 rounded-lg"><MapPin className="text-mainra-blue" /></div>
-                <div>
-                  <h3 className="font-bold mb-1">Kantor Pusat</h3>
-                  <p className="text-gray-400 text-sm whitespace-pre-wrap">{address}</p>
-                </div>
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl font-bold mb-6">Hubungi Kami</h1>
+          <p className="text-gray-400 mb-12 text-lg">
+            Punya pertanyaan tentang program kursus atau kerjasama korporat? <br className="hidden md:block"/>
+            Tim kami siap membantu Anda melalui kanal berikut.
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Email Card */}
+            <div className="bg-[#2A2A2A] p-8 rounded-xl border border-gray-800 hover:border-mainra-orange transition-all duration-300 flex flex-col items-center group">
+              <div className="bg-mainra-orange/10 p-4 rounded-full mb-6 group-hover:bg-mainra-orange/20 transition-colors">
+                <Mail className="text-mainra-orange" size={40} />
               </div>
-              <div className="flex items-start gap-4">
-                <div className="bg-mainra-orange/20 p-3 rounded-lg"><Mail className="text-mainra-orange" /></div>
-                <div>
-                  <h3 className="font-bold mb-1">Email</h3>
-                  <p className="text-gray-400 text-sm">{email}</p>
-                </div>
+              <h3 className="font-bold text-2xl mb-2">Email</h3>
+              <p className="text-gray-400 mb-6">{email}</p>
+              <Button variant="outline" className="w-full justify-center" onClick={() => window.open(`mailto:${email}`)}>
+                Kirim Email
+              </Button>
+            </div>
+
+            {/* WhatsApp Card */}
+            <div className="bg-[#2A2A2A] p-8 rounded-xl border border-gray-800 hover:border-green-500 transition-all duration-300 flex flex-col items-center group">
+              <div className="bg-green-500/10 p-4 rounded-full mb-6 group-hover:bg-green-500/20 transition-colors">
+                <Phone className="text-green-500" size={40} />
               </div>
-              <div className="flex items-start gap-4">
-                <div className="bg-green-500/20 p-3 rounded-lg"><Phone className="text-green-500" /></div>
-                <div>
-                  <h3 className="font-bold mb-1">WhatsApp</h3>
-                  <p className="text-gray-400 text-sm">{phone}</p>
-                </div>
-              </div>
+              <h3 className="font-bold text-2xl mb-2">WhatsApp</h3>
+              <p className="text-gray-400 mb-6">{phone}</p>
+              <Button 
+                variant="outline" 
+                className="w-full justify-center !border-green-500 !text-green-500 hover:!bg-green-500 hover:!text-white"
+                onClick={() => window.open(`https://wa.me/${phone.replace(/[^0-9]/g, '')}`, '_blank')}
+              >
+                Chat WhatsApp
+              </Button>
             </div>
           </div>
 
-          <div className="bg-[#2A2A2A] p-8 rounded-xl border border-gray-800">
-            <h3 className="text-xl font-bold mb-6">Kirim Pesan</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">Nama Lengkap</label>
-                <input type="text" className="w-full bg-mainra-dark border border-gray-700 rounded-lg p-3 text-white focus:border-mainra-orange focus:outline-none" placeholder="Masukkan nama Anda" />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">Email</label>
-                <input type="email" className="w-full bg-mainra-dark border border-gray-700 rounded-lg p-3 text-white focus:border-mainra-orange focus:outline-none" placeholder="email@contoh.com" />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">Pesan</label>
-                <textarea className="w-full bg-mainra-dark border border-gray-700 rounded-lg p-3 text-white focus:border-mainra-orange focus:outline-none h-32 resize-none" placeholder="Tulis pesan Anda disini..."></textarea>
-              </div>
-              <Button variant="primary" className="w-full">
-                <Send size={18} /> Kirim Pesan
-              </Button>
-            </form>
+          <div className="mt-16 pt-8 border-t border-gray-800 text-gray-500 text-sm">
+            <p>Jam Operasional Admin: Senin - Sabtu (09.00 - 17.00 WIB)</p>
           </div>
         </div>
       </div>
@@ -133,8 +133,14 @@ export const CareerPage: React.FC<PageProps> = ({ onBack }) => {
   return (
     <div className="bg-mainra-dark min-h-screen pt-24 pb-20 animate-fade-in text-white">
       <div className="container mx-auto px-4">
-        <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors">
-          <ArrowLeft size={20} /> Kembali
+        <button 
+          onClick={() => {
+            onBack();
+            window.scrollTo(0, 0);
+          }} 
+          className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors group"
+        >
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Kembali ke Beranda
         </button>
 
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -195,8 +201,14 @@ export const PrivacyPage: React.FC<PageProps> = ({ onBack }) => {
   return (
     <div className="bg-mainra-dark min-h-screen pt-24 pb-20 animate-fade-in text-white">
       <div className="container mx-auto px-4 max-w-3xl">
-        <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors">
-          <ArrowLeft size={20} /> Kembali
+        <button 
+          onClick={() => {
+            onBack();
+            window.scrollTo(0, 0);
+          }} 
+          className="flex items-center gap-2 text-gray-400 hover:text-mainra-orange mb-8 transition-colors group"
+        >
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Kembali ke Beranda
         </button>
         
         <div className="bg-[#2A2A2A] p-8 md:p-12 rounded-xl border border-gray-800 shadow-xl">

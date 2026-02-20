@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Course, TargetAudience } from '../types';
 import { Button } from './Button';
-import { Rocket, Star, Gamepad2, Puzzle, ArrowLeft, CheckCircle, Heart } from 'lucide-react';
+import { Rocket, Star, Gamepad2, Puzzle, ArrowLeft, CheckCircle, Heart, Menu, X } from 'lucide-react';
 
 interface KidsPageProps {
   courses: Course[];
@@ -10,6 +10,7 @@ interface KidsPageProps {
 }
 
 export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const kidsCourses = courses.filter(c => c.audience === TargetAudience.KIDS);
 
   return (
@@ -18,19 +19,65 @@ export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack 
       {/* Kids Navbar */}
       <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b-4 border-sky-200 py-4 px-4 shadow-sm">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2" onClick={onBack} role="button">
-            <div className="bg-yellow-400 p-2 rounded-xl transform -rotate-6 shadow-lg border-2 border-yellow-500">
-              <Rocket className="text-white" size={28} />
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={onBack} role="button">
+              <div className="bg-yellow-400 p-2 rounded-xl transform -rotate-6 shadow-lg border-2 border-yellow-500">
+                <Rocket className="text-white" size={28} />
+              </div>
+              <span className="text-2xl font-black text-sky-600 tracking-tight">Mainra<span className="text-yellow-500">Kids</span></span>
             </div>
-            <span className="text-2xl font-black text-sky-600 tracking-tight">Mainra<span className="text-yellow-500">Kids</span></span>
+
+            <div className="hidden md:flex items-center gap-4 ml-4">
+              <button 
+                onClick={() => onNavigate('holiday')}
+                className="text-slate-500 hover:text-sky-600 font-bold transition-colors"
+              >
+                Program Liburan
+              </button>
+            </div>
           </div>
-          <button 
-            onClick={onBack}
-            className="flex items-center gap-2 font-bold text-slate-500 hover:text-sky-600 transition-colors bg-white border-2 border-slate-200 px-4 py-2 rounded-full"
-          >
-            <ArrowLeft size={20} /> <span className="hidden sm:inline">Kembali ke Web Utama</span>
-          </button>
+
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={onBack}
+              className="hidden md:flex items-center gap-2 font-bold text-slate-500 hover:text-sky-600 transition-colors bg-white border-2 border-slate-200 px-4 py-2 rounded-full"
+            >
+              <ArrowLeft size={20} /> <span>Kembali ke Beranda</span>
+            </button>
+            
+            <button 
+              className="md:hidden text-slate-600 p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b-4 border-sky-200 p-4 shadow-lg flex flex-col gap-4 animate-slide-down">
+            <button 
+              onClick={() => {
+                onNavigate('holiday');
+                setIsMenuOpen(false);
+              }}
+              className="text-slate-600 hover:text-sky-600 font-bold py-2 px-4 rounded-xl hover:bg-sky-50 transition-colors text-left"
+            >
+              Program Liburan
+            </button>
+            <div className="h-px bg-slate-100 my-1"></div>
+            <button 
+              onClick={() => {
+                onBack();
+                setIsMenuOpen(false);
+              }}
+              className="flex items-center gap-2 text-slate-600 hover:text-sky-600 font-bold py-2 px-4 rounded-xl hover:bg-sky-50 transition-colors text-left"
+            >
+              <ArrowLeft size={20} /> Kembali ke Beranda
+            </button>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}

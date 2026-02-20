@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Mail, Phone } from 'lucide-react';
 import { SiteSettings } from '../types';
 
 interface FooterProps {
@@ -58,15 +58,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, settings }) => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-bold mb-6">Kantor</h4>
+            <h4 className="text-white font-bold mb-6">Kontak</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li className="flex gap-3">
-                <MapPin size={18} className="text-mainra-orange shrink-0" />
-                <span>{settings.address}</span>
-              </li>
               <li className="flex gap-3">
                 <Mail size={18} className="text-mainra-orange shrink-0" />
                 <span>{settings.email}</span>
+              </li>
+              <li className="flex gap-3">
+                <Phone size={18} className="text-mainra-orange shrink-0" />
+                <span>{settings.phone}</span>
               </li>
             </ul>
           </div>

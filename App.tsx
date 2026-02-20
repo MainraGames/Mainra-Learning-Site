@@ -21,9 +21,9 @@ const App: React.FC = () => {
   
   const [siteSettings, setSiteSettings] = useState<SiteSettings>({
     title: 'Mainra Learning',
-    email: 'halo@mainralearning.id',
-    phone: '+62 812-3456-7890 (Admin)',
-    address: 'Jl. Teknologi Raya No. 10, Jakarta Selatan, Indonesia'
+    email: 'mainralearning@gmail.com',
+    phone: '085117590001',
+    address: '' // Removed physical address
   });
 
   // Handle browser back button manually for SPA feel without router
@@ -65,7 +65,18 @@ const App: React.FC = () => {
           />
         );
       case 'holiday':
-        return <SchoolHolidayPage onBack={() => setCurrentView('home')} />;
+        return (
+          <SchoolHolidayPage 
+            onBack={() => {
+              setCurrentView('home');
+              window.scrollTo(0, 0);
+            }} 
+            onNavigate={(view) => {
+              setCurrentView(view);
+              window.scrollTo(0, 0);
+            }}
+          />
+        );
       case 'faq':
         return <FAQPage onBack={() => setCurrentView('home')} />;
       case 'contact':
@@ -132,9 +143,9 @@ const App: React.FC = () => {
               <section className="py-24 bg-mainra-blue relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/10"></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                   <h2 className="text-4xl font-bold text-white mb-6">Siap Memulai Perjalananmu?</h2>
+                   <h2 className="text-4xl font-bold text-white mb-6">Siap Mewujudkan Ide Game-mu?</h2>
                    <p className="text-blue-100 text-xl max-w-2xl mx-auto mb-10">
-                     Bergabung dengan 10.000+ alumni Mainra Learning yang kini bekerja di studio game top dunia.
+                     Dapatkan bimbingan intensif, materi standar industri, dan komunitas yang suportif untuk memulai karirmu.
                    </p>
                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
                      <button 

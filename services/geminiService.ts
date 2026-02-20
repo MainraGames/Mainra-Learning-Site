@@ -1,7 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { COURSES } from '../constants';
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+// Membaca API key dari environment variable (didefinisikan di vite.config.ts via define)
+// Di Vercel: set GEMINI_API_KEY di Environment Variables
+// Di lokal: set di .env.local sebagai GEMINI_API_KEY=xxxxx
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || '';
 
 // Initialize client outside if key exists, or handle gracefully inside
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
@@ -30,7 +33,7 @@ export const getCourseRecommendation = async (userQuery: string): Promise<string
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.0-flash',
       contents: userQuery,
       config: {
         systemInstruction: systemInstruction,
