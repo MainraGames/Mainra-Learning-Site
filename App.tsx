@@ -7,6 +7,8 @@ import { Footer } from './components/Footer';
 import { SchoolHolidayPage } from './components/SchoolHolidayPage';
 import { FAQPage, ContactPage, CareerPage, PrivacyPage } from './components/SupportPages';
 import { KidsPage } from './components/KidsPage';
+import { WhatsAppBubble } from './components/WhatsAppBubble';
+import { InstructorProfile } from './components/InstructorProfile';
 import { COURSES } from './constants';
 import { TargetAudience, Course, SiteSettings } from './types';
 import { ArrowRight, Code, GraduationCap, Briefcase } from 'lucide-react';
@@ -65,18 +67,7 @@ const App: React.FC = () => {
           />
         );
       case 'holiday':
-        return (
-          <SchoolHolidayPage 
-            onBack={() => {
-              setCurrentView('home');
-              window.scrollTo(0, 0);
-            }} 
-            onNavigate={(view) => {
-              setCurrentView(view);
-              window.scrollTo(0, 0);
-            }}
-          />
-        );
+        return <SchoolHolidayPage onBack={() => setCurrentView('home')} />;
       case 'faq':
         return <FAQPage onBack={() => setCurrentView('home')} />;
       case 'contact':
@@ -139,6 +130,9 @@ const App: React.FC = () => {
                 </div>
               </section>
 
+              {/* Instructor Profile Section */}
+              <InstructorProfile />
+
               {/* CTA Section */}
               <section className="py-24 bg-mainra-blue relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/10"></div>
@@ -173,7 +167,12 @@ const App: React.FC = () => {
     }
   };
 
-  return renderContent();
+  return (
+    <>
+      {renderContent()}
+      <WhatsAppBubble phoneNumber={siteSettings.phone} />
+    </>
+  );
 };
 
 export default App;
