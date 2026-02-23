@@ -67,7 +67,7 @@ const App: React.FC = () => {
           />
         );
       case 'holiday':
-        return <SchoolHolidayPage onBack={() => setCurrentView('home')} />;
+        return <SchoolHolidayPage onBack={() => setCurrentView('home')} onNavigate={(view) => setCurrentView(view)} />;
       case 'faq':
         return <FAQPage onBack={() => setCurrentView('home')} />;
       case 'contact':

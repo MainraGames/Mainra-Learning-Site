@@ -89,18 +89,33 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, onBa
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className={`text-sm font-bold uppercase ${isKids ? 'text-slate-400' : 'text-gray-500'}`}>Investasi</p>
-                <p className={`text-3xl font-black ${isKids ? 'text-slate-800' : 'text-white'}`}>{course.price}</p>
+                <div className="flex flex-col">
+                  {course.originalPrice && (
+                    <span className={`text-sm line-through opacity-60 mb-1 ${isKids ? 'text-slate-400' : 'text-gray-500'}`}>{course.originalPrice}</span>
+                  )}
+                  <p className={`text-3xl font-black leading-none ${isKids ? 'text-slate-800' : 'text-white'}`}>{course.price}</p>
+                </div>
               </div>
               
               {isKids ? (
                 <button 
-                  onClick={() => onNavigate('contact')}
+                  onClick={() => {
+                    const message = encodeURIComponent(`Halo Mainra Kids, saya tertarik untuk mendaftarkan anak saya di kelas *${course.title}*. Mohon informasi lebih lanjut.`);
+                    window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                  }}
                   className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold px-8 py-4 rounded-2xl transition-colors shadow-[0_4px_0_rgb(161,98,7)] hover:shadow-[0_2px_0_rgb(161,98,7)] hover:translate-y-1"
                 >
                   Daftar Sekarang
                 </button>
               ) : (
-                <Button variant="primary" className="!px-8 !py-4 text-lg" onClick={() => onNavigate('contact')}>
+                <Button 
+                  variant="primary" 
+                  className="!px-8 !py-4 text-lg" 
+                  onClick={() => {
+                    const message = encodeURIComponent(`Halo Mainra Learning, saya tertarik untuk mendaftar kelas *${course.title}*. Mohon informasi lebih lanjut.`);
+                    window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                  }}
+                >
                   Daftar Sekarang
                 </Button>
               )}
@@ -166,7 +181,10 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, onBa
                  Tim kami siap membantu menjawab pertanyaan Anda seputar kelas ini.
                </p>
                <button 
-                  onClick={() => onNavigate('contact')}
+                  onClick={() => {
+                    const message = encodeURIComponent(`Halo Admin Mainra, saya butuh bantuan informasi mengenai kelas *${course.title}*.`);
+                    window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                  }}
                   className={`w-full py-3 px-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 ${
                     isKids 
                       ? 'bg-white text-sky-600 border-2 border-sky-200 hover:bg-sky-100' 

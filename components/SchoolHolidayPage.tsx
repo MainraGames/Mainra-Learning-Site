@@ -75,7 +75,7 @@ export const SchoolHolidayPage: React.FC<SchoolHolidayPageProps> = ({ onBack, on
       </nav>
 
       {/* Hero Header */}
-      <div className="relative pt-12 pb-24 overflow-hidden">
+      <div className="relative min-h-[calc(100vh-84px)] flex items-center pt-12 pb-24 overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute top-10 right-10 text-yellow-300 opacity-80 animate-spin-slow">
             <Sun size={120} />
@@ -95,7 +95,13 @@ export const SchoolHolidayPage: React.FC<SchoolHolidayPageProps> = ({ onBack, on
             Bootcamp intensif 5 hari. Dari nol sampai punya game sendiri yang bisa dimainkan di HP Mama Papa!
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold px-8 py-4 rounded-3xl shadow-[0_6px_0_rgb(194,65,12)] hover:shadow-[0_3px_0_rgb(194,65,12)] hover:translate-y-1 transition-all border-b-0">
+                <button 
+                    onClick={() => {
+                      const message = encodeURIComponent(`Halo Mainra Holiday, saya tertarik untuk mendaftar program *Liburan Sekolah: Bikin Game Aja!*. Mohon informasi lebih lanjut.`);
+                      window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                    }}
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold px-8 py-4 rounded-3xl shadow-[0_6px_0_rgb(194,65,12)] hover:shadow-[0_3px_0_rgb(194,65,12)] hover:translate-y-1 transition-all border-b-0"
+                >
                     Daftar Sekarang
                 </button>
                 <button 
@@ -176,11 +182,26 @@ export const SchoolHolidayPage: React.FC<SchoolHolidayPageProps> = ({ onBack, on
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight">Ajak Teman, <br/>Lebih Hemat!</h2>
               <ul className="space-y-4 text-indigo-100 text-lg mb-10 font-medium">
-                <li className="flex items-center gap-3"><CheckCircle size={24} className="text-yellow-400 shrink-0" /> Daftar sendiri: Rp 1.500.000</li>
-                <li className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10"><CheckCircle size={24} className="text-yellow-400 shrink-0" /> <span className="font-bold text-white">Daftar Grup (3 org): Rp 750.000 /anak</span></li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle size={24} className="text-yellow-400 shrink-0" /> 
+                  <span>Daftar sendiri: <span className="line-through opacity-60 mr-2">Rp 2.500.000</span> <span className="text-white font-bold">Rp 1.499.000</span></span>
+                </li>
+                <li className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl border border-white/20 shadow-lg transform hover:scale-[1.02] transition-transform">
+                  <CheckCircle size={24} className="text-yellow-400 shrink-0" /> 
+                  <div className="flex flex-col">
+                    <span className="text-xs uppercase tracking-wider text-yellow-300 font-bold mb-1">🔥 Best Value</span>
+                    <span className="font-bold text-white text-xl">Daftar Grup (3 org): <span className="line-through opacity-60 text-sm mr-2">Rp 1.500.000</span> Rp 749.000 <span className="text-sm font-normal text-indigo-200">/anak</span></span>
+                  </div>
+                </li>
                 <li className="flex items-center gap-3"><CheckCircle size={24} className="text-yellow-400 shrink-0" /> Hemat 50% untuk pendaftaran kolektif!</li>
               </ul>
-              <button className="bg-yellow-400 text-yellow-900 hover:bg-yellow-300 font-black text-xl px-8 py-4 rounded-2xl shadow-[0_4px_0_rgb(161,98,7)] hover:shadow-[0_2px_0_rgb(161,98,7)] hover:translate-y-1 transition-all w-full md:w-auto">
+              <button 
+                onClick={() => {
+                  const message = encodeURIComponent(`Halo Mainra Holiday, saya tertarik untuk mendaftar *Promo Grup (3 orang)* untuk program Liburan Sekolah. Mohon informasi pendaftarannya.`);
+                  window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                }}
+                className="bg-yellow-400 text-yellow-900 hover:bg-yellow-300 font-black text-xl px-8 py-4 rounded-2xl shadow-[0_4px_0_rgb(161,98,7)] hover:shadow-[0_2px_0_rgb(161,98,7)] hover:translate-y-1 transition-all w-full md:w-auto"
+              >
                 Klaim Diskon Grup
               </button>
             </div>

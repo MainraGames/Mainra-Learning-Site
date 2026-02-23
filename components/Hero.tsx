@@ -30,7 +30,14 @@ export const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button variant="primary" className="text-lg px-8 py-3">
+            <Button 
+              variant="primary" 
+              className="text-lg px-8 py-3"
+              onClick={() => {
+                const message = encodeURIComponent(`Halo Mainra Learning, saya ingin berkonsultasi mengenai kelas game development yang cocok untuk saya. Mohon informasinya.`);
+                window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+              }}
+            >
               Mulai Belajar Sekarang <ChevronRight size={20} />
             </Button>
             <Button variant="outline" className="text-lg px-8 py-3 group">

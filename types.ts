@@ -12,6 +12,7 @@ export interface Course {
   level: string;
   duration: string;
   price: string;
+  originalPrice?: string;
   image: string;
   tags: string[];
 }

@@ -9,6 +9,51 @@ interface KidsPageProps {
   onBack: () => void;
 }
 
+const TESTIMONIALS = [
+  {
+    name: "Budi Santoso",
+    role: "Ayah dari Kevin (9 Tahun)",
+    text: "Anak saya jadi lebih kreatif dan logis berpikirnya. Awalnya cuma suka main game, sekarang malah sibuk bikin level game sendiri untuk dimainkan adiknya.",
+    initials: "BS",
+    color: "bg-yellow-400 text-yellow-900"
+  },
+  {
+    name: "Dina Astuti",
+    role: "Ibu dari Rara (11 Tahun)",
+    text: "Mentornya sabar banget ngajarin anak-anak. Materinya juga disesuaikan bahasa anak, jadi mereka nggak merasa sedang belajar pelajaran berat.",
+    initials: "DA",
+    color: "bg-pink-400 text-pink-900"
+  },
+  {
+    name: "Hendra Wijaya",
+    role: "Ayah dari Aris (10 Tahun)",
+    text: "Anak saya jadi lebih disiplin waktu. Dia tahu kapan harus main dan kapan harus fokus ngoding. Skill problem solvingnya meningkat drastis!",
+    initials: "HW",
+    color: "bg-blue-400 text-blue-900"
+  },
+  {
+    name: "Maya Sari",
+    role: "Ibu dari Gendis (8 Tahun)",
+    text: "Materi codingnya sangat ramah anak. Anak saya yang tadinya takut matematika jadi lebih suka karena logika coding ternyata seru.",
+    initials: "MS",
+    color: "bg-green-400 text-green-900"
+  },
+  {
+    name: "Andi Pratama",
+    role: "Ayah dari Farel (12 Tahun)",
+    text: "Sangat worth it! Anak saya sekarang punya portofolio game sendiri di usia 12 tahun. Ini bekal yang luar biasa untuk masa depannya.",
+    initials: "AP",
+    color: "bg-purple-400 text-purple-900"
+  },
+  {
+    name: "Siti Aminah",
+    role: "Ibu dari Zahra (10 Tahun)",
+    text: "Mentornya sangat sabar. Anak saya yang pemalu jadi lebih percaya diri saat mempresentasikan gamenya di depan teman-temannya.",
+    initials: "SA",
+    color: "bg-orange-400 text-orange-900"
+  }
+];
+
 export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const kidsCourses = courses.filter(c => c.audience === TargetAudience.KIDS);
@@ -81,7 +126,7 @@ export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack 
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-24 overflow-hidden">
+      <section className="relative min-h-[calc(100vh-84px)] flex items-center pt-12 pb-24 overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="inline-block bg-yellow-300 text-yellow-900 font-bold px-6 py-2 rounded-full mb-6 transform rotate-2 border-2 border-yellow-400 shadow-lg animate-bounce">
             🚀 Coding is Super Fun!
@@ -182,10 +227,21 @@ export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack 
                     <div className="flex items-center justify-between border-t-2 border-slate-100 pt-6">
                       <div>
                         <p className="text-xs font-bold text-slate-400 uppercase">Investasi</p>
-                        <p className="text-xl font-black text-slate-800">{course.price}</p>
+                        <div className="flex flex-col">
+                          {course.originalPrice && (
+                            <span className="text-xs text-slate-400 line-through leading-none mb-1">{course.originalPrice}</span>
+                          )}
+                          <p className="text-xl font-black text-slate-800 leading-none">{course.price}</p>
+                        </div>
                       </div>
-                      <button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold px-6 py-3 rounded-2xl transition-colors flex items-center gap-2">
-                        Lihat Detail
+                      <button 
+                        onClick={() => {
+                          const message = encodeURIComponent(`Halo Mainra Kids, saya tertarik untuk mendaftarkan anak saya di kelas *${course.title}*. Mohon informasi lebih lanjut.`);
+                          window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+                        }}
+                        className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold px-6 py-3 rounded-2xl transition-colors flex items-center gap-2"
+                      >
+                        Daftar Sekarang
                       </button>
                     </div>
                   </div>
@@ -197,36 +253,55 @@ export const KidsPage: React.FC<KidsPageProps> = ({ courses, onNavigate, onBack 
       </section>
 
       {/* Parents Testimonial */}
-      <section className="py-20 bg-sky-600 text-white relative overflow-hidden">
+      <section className="py-24 bg-sky-600 text-white relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
+        <div className="relative z-10">
+          <div className="container mx-auto px-4 text-center mb-16">
             <Heart className="mx-auto mb-4 text-pink-300 fill-current animate-pulse" size={48} />
-            <h2 className="text-3xl md:text-4xl font-bold">Kata Orang Tua</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-4">Kata Orang Tua</h2>
+            <p className="text-sky-100 text-lg max-w-2xl mx-auto">Lebih dari sekadar belajar coding, kami membangun kepercayaan diri dan kreativitas anak.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
-               <p className="text-lg mb-6 italic">"Anak saya jadi lebih kreatif dan logis berpikirnya. Awalnya cuma suka main game, sekarang malah sibuk bikin level game sendiri untuk dimainkan adiknya."</p>
-               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center font-bold text-yellow-900">BS</div>
-                 <div>
-                   <h4 className="font-bold">Budi Santoso</h4>
-                   <p className="text-sky-200 text-sm">Ayah dari Kevin (9 Tahun)</p>
-                 </div>
-               </div>
-             </div>
-             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
-               <p className="text-lg mb-6 italic">"Mentornya sabar banget ngajarin anak-anak. Materinya juga disesuaikan bahasa anak, jadi mereka nggak merasa sedang belajar pelajaran berat."</p>
-               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-pink-400 flex items-center justify-center font-bold text-pink-900">DA</div>
-                 <div>
-                   <h4 className="font-bold">Dina Astuti</h4>
-                   <p className="text-sky-200 text-sm">Ibu dari Rara (11 Tahun)</p>
-                 </div>
-               </div>
-             </div>
+
+          {/* Autoscrolling Marquee Container */}
+          <div className="relative flex overflow-x-hidden">
+            <div className="flex animate-marquee whitespace-nowrap py-4">
+              {[...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => (
+                <div key={idx} className="mx-4 w-[350px] md:w-[450px] bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20 flex flex-col whitespace-normal">
+                  <p className="text-lg mb-8 italic leading-relaxed">"{t.text}"</p>
+                  <div className="mt-auto flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl ${t.color} flex items-center justify-center font-black text-xl shadow-lg transform -rotate-3`}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg">{t.name}</h4>
+                      <p className="text-sky-200 text-sm font-medium">{t.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Second Marquee (Reverse) */}
+          <div className="relative flex overflow-x-hidden mt-8">
+            <div className="flex animate-marquee-reverse whitespace-nowrap py-4">
+              {[...TESTIMONIALS, ...TESTIMONIALS].reverse().map((t, idx) => (
+                <div key={idx} className="mx-4 w-[350px] md:w-[450px] bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/20 flex flex-col whitespace-normal">
+                  <p className="text-lg mb-8 italic leading-relaxed">"{t.text}"</p>
+                  <div className="mt-auto flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl ${t.color} flex items-center justify-center font-black text-xl shadow-lg transform rotate-3`}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg">{t.name}</h4>
+                      <p className="text-sky-200 text-sm font-medium">{t.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

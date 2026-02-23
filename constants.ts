@@ -8,7 +8,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.KIDS,
     level: 'Pemula',
     duration: '4 Minggu',
-    price: 'Rp 500.000',
+    price: 'Rp 499.000',
+    originalPrice: 'Rp 750.000',
     image: 'https://picsum.photos/400/250?random=1',
     tags: ['Visual Scripting', '2D', 'Logika']
   },
@@ -19,7 +20,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.KIDS,
     level: 'Menengah',
     duration: '6 Minggu',
-    price: 'Rp 750.000',
+    price: 'Rp 749.000',
+    originalPrice: 'Rp 1.100.000',
     image: 'https://picsum.photos/400/250?random=2',
     tags: ['3D Design', 'Creativity', 'Fun']
   },
@@ -30,7 +32,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.STUDENTS,
     level: 'Pemula',
     duration: '8 Minggu',
-    price: 'Rp 1.200.000',
+    price: 'Rp 1.199.000',
+    originalPrice: 'Rp 1.800.000',
     image: 'https://picsum.photos/400/250?random=3',
     tags: ['C#', 'Scripting', 'Physics']
   },
@@ -41,7 +44,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.STUDENTS,
     level: 'Lanjut',
     duration: '5 Minggu',
-    price: 'Rp 900.000',
+    price: 'Rp 899.000',
+    originalPrice: 'Rp 1.350.000',
     image: 'https://picsum.photos/400/250?random=4',
     tags: ['Math', 'Vectors', 'Algorithms']
   },
@@ -52,7 +56,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.CAREER,
     level: 'Profesional',
     duration: '12 Minggu',
-    price: 'Rp 3.500.000',
+    price: 'Rp 3.499.000',
+    originalPrice: 'Rp 5.250.000',
     image: 'https://picsum.photos/400/250?random=5',
     tags: ['Certification', 'Professional', 'Architecture']
   },
@@ -63,7 +68,8 @@ export const COURSES: Course[] = [
     audience: TargetAudience.CAREER,
     level: 'Ahli',
     duration: '10 Minggu',
-    price: 'Rp 4.000.000',
+    price: 'Rp 3.999.000',
+    originalPrice: 'Rp 6.000.000',
     image: 'https://picsum.photos/400/250?random=6',
     tags: ['Netcode', 'Multiplayer', 'Backend']
   }

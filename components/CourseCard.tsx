@@ -81,9 +81,21 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
 
           <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-700">
-            <span className="text-lg font-bold text-white">{course.price}</span>
-            <Button variant="outline" className="!px-4 !py-1.5 text-sm !border-gray-600 !text-gray-300 hover:!border-mainra-orange hover:!text-white">
-              Info Detail <ArrowRight size={14} />
+            <div className="flex flex-col">
+              {course.originalPrice && (
+                <span className="text-xs text-gray-500 line-through mb-0.5">{course.originalPrice}</span>
+              )}
+              <span className="text-lg font-bold text-white leading-none">{course.price}</span>
+            </div>
+            <Button 
+              variant="primary" 
+              className="!px-4 !py-1.5 text-sm"
+              onClick={() => {
+                const message = encodeURIComponent(`Halo Mainra Learning, saya tertarik untuk mendaftar kelas *${course.title}*. Mohon informasi lebih lanjut.`);
+                window.open(`https://wa.me/6285117590001?text=${message}`, '_blank');
+              }}
+            >
+              Daftar Sekarang <ArrowRight size={14} />
             </Button>
           </div>
         </div>
